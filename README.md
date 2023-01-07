@@ -1,4 +1,4 @@
-# iq_gnc
+# iq_gnc - Guiding Navigation Control
 
 ![iq](docs/imgs/iq.JPG)
 
