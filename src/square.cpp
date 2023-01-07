@@ -14,8 +14,8 @@ int main(int argc, char** argv)
 	wait4connect();
 
 	//wait for used to switch to mode GUIDED
-	wait4start();
-
+	//wait4start();
+	set_mode("GUIDED");
 	//create local reference frame 
 	initialize_local_frame();
 
@@ -57,14 +57,14 @@ int main(int argc, char** argv)
 	waypointList.push_back(nextWayPoint);
 
 
-	//specify control loop rate. We recommend a low frequency to not over load the FCU with messages. Too many messages will cause the drone to be sluggish
+	//specify control loop rate. We recommend a low frequency to not over load the FCU with messages. Too many messages will cause the drone to be sluggish(muy lento)
 	ros::Rate rate(2.0);
-	int counter = 0;
+	int counter = 0; //in order to know the waypoints reached and it will be our index of the waypoints' vector
 	while(ros::ok())
 	{
-		ros::spinOnce();
-		rate.sleep();
-		if(check_waypoint_reached(.3) == 1)
+		ros::spinOnce();//habilita que los publicadores publiquen
+		rate.sleep();//espera síncronamente
+		if(check_waypoint_reached(.3) == 1) // we need a tolerance, in this case 0.3 m
 		{
 			if (counter < waypointList.size())
 			{
